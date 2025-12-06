@@ -22,6 +22,8 @@
     - 在 "API restrictions" 下，選擇 "Restrict key" 並選取 "Places API" 和 "Maps JavaScript API"。
     - 在 "Application restrictions" 下，您稍後可以將其限制為您的特定網域或 IP。
 
+
+
 ## 部署步驟
 
 1.  **建置並部署**

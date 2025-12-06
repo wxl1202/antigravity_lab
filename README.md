@@ -55,6 +55,8 @@
 
 本專案已包含 GitHub Actions 設定檔 (`.github/workflows/deploy.yaml`)，可自動部署至 Cloud Run。
 
+
+
 ### GitHub Actions 設定步驟 (人工動作)
 
 為了讓自動部署生效，您需要在 GitHub Repository 的 **Settings > Secrets and variables > Actions** 中設定以下 Secrets：
