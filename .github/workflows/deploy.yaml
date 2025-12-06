@@ -39,4 +39,4 @@ jobs:
         region: ${{ env.REGION }}
         env_vars: |
           GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}
-        flags: '--allow-unauthenticated'
+        flags: '--allow-unauthenticated --cpu 1 --memory 256Mi --min-instances 0 --max-instances 5'

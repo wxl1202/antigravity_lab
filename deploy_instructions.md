@@ -32,6 +32,10 @@
     --source . \
     --platform managed \
     --region asia-east1 \
+    --cpu 1 \
+    --memory 256Mi \
+    --min-instances 0 \
+    --max-instances 5 \
     --allow-unauthenticated \
     --set-env-vars GOOGLE_MAPS_API_KEY=[API_KEY]
     ```
