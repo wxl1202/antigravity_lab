@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食雷達 - 高分推薦</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+    {% if api_key %}
+    <script>
+        window.GOOGLE_MAPS_API_KEY = "{{ api_key }}";
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places&language=zh-TW"></script>
+    {% endif %}
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="glass-header">
+            <div class="logo">
+                <i class="fa-solid fa-utensils"></i>
+                <h1>美食雷達</h1>
+            </div>
+            <div class="view-toggle">
+                <button id="listViewBtn" class="active" title="列表模式"><i class="fa-solid fa-list"></i></button>
+                <button id="mapViewBtn" title="地圖模式"><i class="fa-solid fa-map"></i></button>
+            </div>
+        </header>
+
+        <main id="mainContent">
+            <div id="loadingState" class="state-container">
+                <div class="spinner"></div>
+                <p>正在搜尋附近美味...</p>
+            </div>
+
+            <div id="errorState" class="state-container hidden">
+                <i class="fa-solid fa-circle-exclamation error-icon"></i>
+                <p id="errorMessage">發生錯誤。</p>
+                <button id="retryBtn" class="primary-btn">重試</button>
+            </div>
+
+            <div id="listView" class="view-section active">
+                <div class="cards-grid" id="cardsContainer">
+                    <!-- Cards will be injected here -->
+                </div>
+                <div id="sentinel" style="height: 20px; text-align: center; padding: 10px;">
+                    <i class="fa-solid fa-spinner fa-spin hidden" id="loadMoreSpinner"></i>
+                </div>
+            </div>
+
+            <div id="mapView" class="view-section">
+                <div id="googleMap"></div>
+            </div>
+        </main>
+
+        <div id="location-warning" class="toast hidden">
+            <i class="fa-solid fa-location-arrow"></i> 使用預設位置 (模擬模式)
+        </div>
+    </div>
+
+    <!-- Template for Card -->
+    <template id="cardTemplate">
+        <div class="card glass-card">
+            <div class="card-image-container">
+                <img src="" alt="餐廳照片" class="card-img">
+                <div class="card-badge"></div>
+            </div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h2 class="place-name"></h2>
+                    <span class="place-distance"></span>
+                </div>
+                <div class="card-rating">
+                    <div class="stars"></div>
+                    <span class="review-count"></span>
+                </div>
+                <p class="place-address"><i class="fa-solid fa-location-dot"></i> <span></span></p>
+                <div class="card-actions" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button class="review-btn secondary-btn">評論</button>
+                    <a href="#" target="_blank" class="direction-btn">導航</a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Reviews Modal -->
+    <div id="reviewsModal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTitle">評論</h2>
+            <div id="modalReviews" class="reviews-list">
+                <div class="spinner secondary"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>
